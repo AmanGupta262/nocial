@@ -1,7 +1,7 @@
 module.exports.profile = (req, res) => {
-    return res.end("<h1>Profile</h1>");
+    return res.render('profile', {title: 'Profile'});
 };
 
 module.exports.posts = (req, res) => {
-    return res.end("<h1>Posts</h1>");
+    return res.render('posts', { title: 'Posts' });
 };
