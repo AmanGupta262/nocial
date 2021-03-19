@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/AmanGupta262/nocial/issues"
   },
-  "homepage": "https://github.com/AmanGupta262/nocial#readme"
+  "homepage": "https://github.com/AmanGupta262/nocial#readme",
+  "dependencies": {
+    "ejs": "^3.1.6"
+  }
 }
