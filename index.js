@@ -10,6 +10,10 @@ app.use(expressLayouts);
 //static files
 app.use(express.static('./assets'));
 
+// set styles and scripts for sub pages
+app.set('layout extractStyles', true);
+app.set('layout extractScripts', true);
+
 // use router
 app.use('/', require('./routes'));
 
