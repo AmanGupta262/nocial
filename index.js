@@ -10,6 +10,8 @@ const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
 
+const MongoStore = require('connect-mongo');
+
 
 // layouts
 app.use(expressLayouts);
@@ -31,6 +33,7 @@ app.set('layout extractScripts', true);
 app.set('view engine', 'ejs');
 app.set('views', './views');
 
+// use MongoStore to store cookie in mongodb
 app.use(session({
     name : 'nocial',
     secret : 'fjdsfdjk',
@@ -38,7 +41,15 @@ app.use(session({
     resave : false,
     cookie: {
         maxAge: (1000 * 60 * 100)
+    },
+    store : MongoStore.create({
+        mongoUrl: 'mongodb://localhost/nocial_development',
+        autoRemove: 'disabled'
+    },
+    function(err){
+        console.log(err || 'mongodb setup ok');
     }
+    )
 }));
 
 app.use(passport.initialize());
