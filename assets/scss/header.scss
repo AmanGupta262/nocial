@@ -1,0 +1,29 @@
+header{
+    background-color: dodgerblue;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: white;
+    padding: .5rem;
+
+    .logo{
+        font-size: 1.5rem;
+        font-weight: bold;
+        letter-spacing: 3px;
+    }    
+
+    ul{
+        display: flex;
+        list-style: none;
+    }
+    
+    a{
+        color: white;
+        text-decoration: none;
+        margin: 0.5rem;
+
+        &:hover{
+            color: lightgray;
+        }
+    }
+}

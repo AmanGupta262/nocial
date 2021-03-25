@@ -1,0 +1,16 @@
+footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  background-color: gray;
+  color: white; }
+  footer ul {
+    display: flex;
+    list-style: none; }
+  footer a {
+    color: white;
+    text-decoration: none;
+    margin: 0.5rem; }
+    footer a:hover {
+      color: lightgray; }
