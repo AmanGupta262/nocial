@@ -24,7 +24,7 @@ module.exports.create = (req, res) => {
         if(err){ console.log("Error in finding user in signing up"); return;}
 
         if(!user){
-            User.create(req.body, (err, usr) => {
+            User.create(req.body, (err, user) => {
                 if(err){ console.log("Error in creating user in signing up"); return; }
 
                 return res.redirect('/users/sign-in');
