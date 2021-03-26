@@ -1,5 +1,6 @@
 const Post = require('../models/post')
 const User = require('../models/user')
+const timeago = require('timeago.js');
 
 module.exports.home = function (req, res) {
     Post.find({}).populate('user').exec((err, posts) => {
@@ -7,7 +8,8 @@ module.exports.home = function (req, res) {
 
         return res.render('home', {
             title: "Home",
-            posts: posts
+            posts: posts,
+            timeago: timeago
         });
     });
 };
