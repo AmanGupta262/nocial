@@ -1,10 +1,28 @@
 <link rel="stylesheet" href="/css/home.css">
 
-<h1>Nocial <%= title %></h1>
+<h1>Nocial <%= title %>
+</h1>
 
 <section class="post-form">
     <form action="/posts/create" method="POST">
         <textarea name="content" cols="30" rows="10" required placeholder="Enter content here..."></textarea>
         <button type="submit">Post</button>
     </form>
+</section>
+
+<section class="posts">
+    <ul>
+        <% for(let post of posts){ %>
+            <li class="post-content">
+                <%= post.content %><br>
+                    <small class="author">
+                        <%= post.user.name %>
+                    </small><br>
+                    <small class="created-at">
+                        <%= post.createdAt.toDateString() %>
+                    </small>
+            </li>
+        <% } %>
+    </ul>
+
 </section>
