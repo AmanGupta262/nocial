@@ -31,6 +31,16 @@
                         </form>
                     <% } %>
                 </div>
+                <div class="comments">
+                    <ul class="comments-list">
+                        <% for(let comment of post.comments){ %>
+                            <div>
+                                <p><%= comment.content %></p>
+                                <p><small> <%= comment.user.name %></small></p>
+                            </div>
+                        <% } %>
+                    </ul>
+                </div>
             </li>
         <% } %>
     </ul>
