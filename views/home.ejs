@@ -5,11 +5,11 @@
 
 <section class="post-form">
     <% if(locals.user) { %>
-    <form action="/posts/create" method="POST">
-        <textarea name="content" cols="30" rows="10" required placeholder="Enter content here..."></textarea>
-        <button type="submit">Post</button>
-    </form>
-    <% } %>
+        <form action="/posts/create" method="POST">
+            <textarea name="content" cols="30" rows="10" required placeholder="Enter content here..."></textarea>
+            <button type="submit">Post</button>
+        </form>
+        <% } %>
 </section>
 
 <section class="posts">
@@ -17,13 +17,20 @@
     <ul>
         <% for(let post of posts){ %>
             <li class="post-content">
-                <%= post.content %><br>
-                    <small class="author">
-                        <%= post.user.name %>
-                    </small><br>
-                    <small class="created-at">
-                        <%= timeago.format(post.createdAt) %>
-                    </small>
+                <div class="post-detail">
+                    <%= post.content %><br>
+                       <pre><small class="author"><%= post.user.name %></small>    <small class="created-at"><%= timeago.format(post.createdAt) %></small></pre> 
+                </div>
+
+                <div class="comment-form">
+                    <% if(locals.user) { %>
+                        <form action="/comments/create" method="post">
+                            <input type="text" name="content">
+                            <input type="hidden" name="post" value="<%= post._id %>">
+                            <button type="submit">Add</button>
+                        </form>
+                    <% } %>
+                </div>
             </li>
         <% } %>
     </ul>
