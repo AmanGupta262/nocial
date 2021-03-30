@@ -18,7 +18,12 @@
 
         <% for(let post of posts){ %>
             <div class="post white-back">
-                <div class="post-title">Post Title</div>
+                <div class="post-title">
+                    Post Title 
+                    <% if(locals.user && (locals.user.id == post.user.id)){ %>
+                        <small><a href="/posts/destroy/<%= post.id %>">X</a></small>
+                    <% } %>
+                </div>
                 <div class="post-content">
                     <%= post.content %>
                 </div>
