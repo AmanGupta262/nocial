@@ -17,51 +17,7 @@
         <% } %>
 
         <% for(let post of posts){ %>
-            <div class="post white-back">
-                <div class="post-title">
-                    Post Title 
-                    <% if(locals.user && (locals.user.id == post.user.id)){ %>
-                        <small><a href="/posts/destroy/<%= post.id %>">X</a></small>
-                    <% } %>
-                </div>
-                <div class="post-content">
-                    <%= post.content %>
-                </div>
-                <div class="post-detail d-flex">
-                    <div class="post-author">
-                        <i class="fas fa-user"></i><%= post.user.name %>
-                    </div>
-                    <div class="post-date">
-                        <i class="fas fa-calendar"></i> <%= timeago.format(post.createdAt) %>
-                    </div>
-                </div>
-                <div class="comments-container">
-                    <% if(locals.user) { %>
-                        <div class="comment-form">
-                            <h4>Add Comment</h4>
-                            <form action="/comments/create" method="post">
-                                <input type="text" name="content" placeholder="Add comment" required>
-                                <input type="hidden" name="post" value="<%= post._id %>">
-                                <button class="btn submit-btn" type="submit">Add</button>
-                            </form>
-                        </div>
-                    <% } %>
-                    <% if(post.comments.length  ){ %>
-                    <div class="comments">
-                        <% for(let comment of post.comments){ %>
-                            <div class="comment">
-                                <p> <%= comment.content %></p> 
-                                <% if(locals.user && (locals.user.id==comment.user.id)){ %>
-                                    <small><a href="/comments/destroy/<%= comment.id %>">X</a></small>
-                                    <% } %>
-                                <p class="user"><i class="fas fa-user"></i>  <%= comment.user.name %></p>
-                            </div>
-                        <% } %>
-                    </div>
-                    <% } %>
-                </div>
-
-            </div>     
+            <%- include("_post", {post: post}) %>  
         <% } %>
     </div>
 </section>
