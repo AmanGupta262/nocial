@@ -1,0 +1,36 @@
+.container {
+  justify-content: center;
+  margin-top: 2rem;
+
+  .form{
+    padding: 2rem;
+    min-width: 400px;
+    max-width: 400px;
+    min-height: 300px;
+
+    .form-field {
+      margin-bottom: .5rem;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 1rem;
+      color: darkslategray;
+    }
+    input {
+      margin-bottom: 0.5rem;
+      width: 100%;
+      border: 1px solid gray;
+    }
+
+    .error input {
+      border: 1px solid red;
+    }
+    .success input {
+      border: 1px solid green;
+    }
+    small {
+      color: red;
+    }
+  }
+}

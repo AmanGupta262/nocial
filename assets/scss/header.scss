@@ -1,29 +1,30 @@
-header{
-    background-color: dodgerblue;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: white;
-    padding: .5rem;
+.navbar {
+  background-color: white;
+  justify-content: space-between;
+  color: dodgerblue;
+  padding: 0.5rem;
+  box-shadow: 0 0 10px 5px #dceaff;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 
-    .logo{
-        font-size: 1.5rem;
-        font-weight: bold;
-        letter-spacing: 3px;
-    }    
+  .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    letter-spacing: 3px;
+  }
+  ul {
+    list-style: none;
+  }
+  a {
+    color: dodgerblue;
+    text-decoration: none;
+    margin: 0.5rem;
+    outline: none;
 
-    ul{
-        display: flex;
-        list-style: none;
+    &:hover,
+    &:focus {
+      color: black;
     }
-    
-    a{
-        color: white;
-        text-decoration: none;
-        margin: 0.5rem;
-
-        &:hover{
-            color: lightgray;
-        }
-    }
+  }
 }

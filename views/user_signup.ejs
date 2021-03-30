@@ -1,7 +1,35 @@
-<form action="/users/create" method="post">
-    <input type="email" name="email" id="" placeholder="Enter your email" required>
-    <input type="password" name="password" id="" placeholder="Enter password" required>
-    <input type="password" name="confirm_password" id="" placeholder="Confirm password" required>
-    <input type="text" name="name" id="" placeholder="Enter your name" required>
-    <button type="submit">Sign Up</button>
-</form>
+<link rel="stylesheet" href="/css/form.css">
+
+<div class="sign-up-form form white-back">
+    <form action="/users/create" method="post">
+
+        <div class="form-field">
+            <label for="Email">Email:</label>
+            <input type="text" name="email" id="email" autocomplete="off" placeholder="Enter your email">
+            <small></small>
+        </div>
+
+        <div class="form-field">
+            <label for="password">Password:</label>
+            <input type="password" name="password" id="password" autocomplete="off" placeholder="Enter password">
+            <small></small>
+        </div>
+
+        <div class="form-field">
+            <label for="username">Confirm Password:</label>
+            <input type="password" name="confirm-password" id="confirm-password" autocomplete="off"
+                placeholder="Confirm password">
+            <small></small>
+        </div>
+
+        <div class="form-field">
+            <label for="username">Name:</label>
+            <input type="text" name="username" id="username" autocomplete="off" placeholder="Enter your name">
+            <small></small>
+        </div>
+
+        <button class="btn submit-btn" type="submit">Sign Up</button>
+    </form>
+</div>
+
+<script src="/js/validate-form.js"></script>

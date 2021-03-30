@@ -1,16 +1,14 @@
-footer {
-  display: flex;
+.footer {
   justify-content: space-between;
-  align-items: center;
   padding: 0.5rem;
   background-color: gray;
   color: white; }
-  footer ul {
-    display: flex;
+  .footer ul {
     list-style: none; }
-  footer a {
+  .footer a {
     color: white;
+    font-size: 0.8rem;
     text-decoration: none;
     margin: 0.5rem; }
-    footer a:hover {
+    .footer a:hover {
       color: lightgray; }

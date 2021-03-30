@@ -1,0 +1,77 @@
+.main .post-container h2 {
+  color: darkslateblue; }
+
+.main .post-form textarea {
+  width: 100%;
+  padding: 1rem;
+  outline: none;
+  margin-block: 0.5rem;
+  border: none;
+  resize: none;
+  border-radius: 10px;
+  color: black; }
+  .main .post-form textarea:hover, .main .post-form textarea:focus {
+    background-color: #dceaff; }
+
+.main .post .post-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: darkslategray;
+  margin-bottom: 1rem; }
+
+.main .post .post-content {
+  padding: 1rem; }
+
+.main .post .post-detail {
+  padding: 1rem;
+  justify-content: space-between;
+  font-size: 0.8rem; }
+  .main .post .post-detail .fas {
+    color: grey; }
+
+.comments-container {
+  padding: 1rem;
+  border-top: 1px solid darkslateblue; }
+
+.comment-form h4 {
+  margin-bottom: 1rem; }
+
+.comment-form input {
+  padding: 0.5rem 1rem;
+  width: 75%;
+  outline: none;
+  border: none;
+  border-radius: 5px; }
+  .comment-form input:hover, .comment-form input:focus {
+    background-color: #dceaff; }
+
+.comments {
+  background-color: lightgray;
+  padding: 1rem;
+  margin-top: 0.5rem;
+  border-radius: 10px; }
+  .comments .comment {
+    margin-bottom: 0.5rem; }
+    .comments .comment .user {
+      margin-top: 0.2rem;
+      font-size: 0.8rem;
+      color: gray; }
+
+.aside {
+  align-self: flex-start;
+  position: sticky;
+  top: 75px; }
+  .aside header h3 {
+    color: darkslateblue; }
+
+.friends-container .user {
+  padding: 1rem;
+  border-bottom: 1px solid grey; }
+  .friends-container .user .fas {
+    font-size: 1.5rem;
+    color: darkslategray; }
+  .friends-container .user a {
+    color: darkslategray;
+    text-decoration: none; }
+    .friends-container .user a:hover {
+      color: rgba(47, 79, 79, 0.8); }

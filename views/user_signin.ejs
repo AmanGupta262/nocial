@@ -1,5 +1,19 @@
-<form action="/users/create-session" method="post">
-    <input type="email" name="email" id="" placeholder="Enter your email" required>
-    <input type="password" name="password" id="" placeholder="Enter password" required>
-    <button type="submit">Sign in</button>
-</form>
+<link rel="stylesheet" href="/css/form.css">
+
+<div class="sign-in-form form white-back">
+    <form action="/users/create-session" method="post">
+        <div class="form-field">
+            <label for="email">Email:</label>
+            <input type="email" name="email" id="email" autocomplete="off" placeholder="Enter email">
+            <small></small>
+        </div>
+
+        <div class="form-field">
+            <label for="password">Password:</label>
+            <input type="password" name="password" id="password" autocomplete="off" placeholder="Enter password">
+            <small></small>
+        </div>
+
+        <button class="btn submit-btn" type="submit">Sign in</button>
+    </form>
+</div>

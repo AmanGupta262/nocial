@@ -1,48 +1,59 @@
 <link rel="stylesheet" href="/css/home.css">
 
-<h1>Nocial <%= title %>
-</h1>
+<section class="main">
+    <div class="post-container">
+        <header>
+            <h2 class="white-back">Posts</h2>
 
-<section class="post-form">
-    <% if(locals.user) { %>
-        <form action="/posts/create" method="POST">
-            <textarea name="content" cols="30" rows="10" required placeholder="Enter content here..."></textarea>
-            <button type="submit">Post</button>
-        </form>
+        </header>
+        <% if(locals.user) { %>
+            <div class="post-form white-back">
+                <h3>Create Post</h3>
+                <form action="/posts/create" method="POST">
+                    <textarea name="content" rows="10" required placeholder="Enter content here..."></textarea>
+                    <button class="btn submit-btn" type="submit">Post</button>
+                </form>
+            </div>
         <% } %>
-</section>
 
-<section class="posts">
-    <h3>Posts</h3>
-    <ul>
         <% for(let post of posts){ %>
-            <li class="post-content">
-                <div class="post-detail">
-                    <%= post.content %><br>
-                       <pre><small class="author"><%= post.user.name %></small>    <small class="created-at"><%= timeago.format(post.createdAt) %></small></pre> 
+            <div class="post white-back">
+                <div class="post-title">Post Title</div>
+                <div class="post-content">
+                    <%= post.content %>
                 </div>
-
-                <div class="comment-form">
+                <div class="post-detail d-flex">
+                    <div class="post-author">
+                        <i class="fas fa-user"></i><%= post.user.name %>
+                    </div>
+                    <div class="post-date">
+                        <i class="fas fa-calendar"></i> <%= timeago.format(post.createdAt) %>
+                    </div>
+                </div>
+                <div class="comments-container">
                     <% if(locals.user) { %>
-                        <form action="/comments/create" method="post">
-                            <input type="text" name="content">
-                            <input type="hidden" name="post" value="<%= post._id %>">
-                            <button type="submit">Add</button>
-                        </form>
+                        <div class="comment-form">
+                            <h4>Add Comment</h4>
+                            <form action="/comments/create" method="post">
+                                <input type="text" name="content" placeholder="Add comment" required>
+                                <input type="hidden" name="post" value="<%= post._id %>">
+                                <button class="btn submit-btn" type="submit">Add</button>
+                            </form>
+                        </div>
                     <% } %>
-                </div>
-                <div class="comments">
-                    <ul class="comments-list">
+                    <% if(post.comments.length  ){ %>
+                    <div class="comments">
                         <% for(let comment of post.comments){ %>
-                            <div>
-                                <p><%= comment.content %></p>
-                                <p><small> <%= comment.user.name %></small></p>
+                            <div class="comment">
+                                <p> <%= comment.content %></p>
+                                <p class="user"><i class="fas fa-user"></i>  <%= comment.user.name %></p>
                             </div>
                         <% } %>
-                    </ul>
+                    </div>
+                    <% } %>
                 </div>
-            </li>
-        <% } %>
-    </ul>
 
+            </div>     
+        <% } %>
+    </div>
 </section>
