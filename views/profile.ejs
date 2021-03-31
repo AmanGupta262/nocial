@@ -1,5 +1,28 @@
-<h1>
-        Nocial User <%= title %>
-</h1>
-<p><%= profile_user.name %></p>
-<p><%= profile_user.email %></p>
+<link rel="stylesheet" href="/css/form.css">
+
+<% if(user.id == profile_user.id) { %>
+        <div class="sign-in-form form white-back">
+                <form action="/users/update/<%= profile_user.id %>" method="post">
+                        <div class="form-field">
+                                <label for="email">Email:</label>
+                                <input type="email" name="email" id="email" value="<%= profile_user.email %>" autocomplete="off" placeholder="Enter email" required>
+                                <small></small>
+                        </div>
+                
+                        <div class="form-field">
+                                <label for="name">Name:</label>
+                                <input type="text" name="name" id="name" value="<%= profile_user.name %>" autocomplete="off" placeholder="Enter name" required>
+                                <small></small>
+                        </div>
+                
+                        <button class="btn submit-btn" type="submit">Update</button>
+                </form>
+        </div>
+<%} else{ %>
+        <p>
+                <%= profile_user.name %>
+        </p>
+        <p>
+                <%= profile_user.email %>
+        </p>
+<% } %>

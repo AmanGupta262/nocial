@@ -9,6 +9,7 @@ router.get('/posts', usersController.posts);
 router.get('/sign-in', usersController.signIn);
 router.get('/sign-up', usersController.signUp);
 router.post('/create', usersController.create);
+router.post('/update/:id', usersController.update);
 
 // use passport as middleware for authenticate
 router.post('/create-session',passport.authenticate(
