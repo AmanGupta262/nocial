@@ -9,6 +9,7 @@ module.exports.createPost = (req, res) => {
     (err, post) => {
         if(err){ console.log("Error in creating post"); return; }
 
+        req.flash('success', "Post published!");
         return res.redirect('back');
     });
 };
@@ -21,11 +22,12 @@ module.exports.destroy = async (req, res) => {
             post.remove();
 
             let comments = await Comment.deleteMany({ post: req.params.id });
+            req.flash('success', "Post with associated comments deleted");
         }
         return res.redirect('back');
 
     } catch (e) {
-        console.log("Error ", e);
-        return;
+        req.flash('error', e);
+        return res.redirect('back');
     }
 }

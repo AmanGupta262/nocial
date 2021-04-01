@@ -19,6 +19,15 @@
 <body>
     <%- include('_header') -%>
     
+    <% if(flash.success && flash.success.length){ %>
+        <h4><%= flash.success %></h4>
+    <% } %>
+    <% if(flash.error && flash.error.length){ %>
+        <h4>
+            <%= flash.error %>
+        </h4>
+    <% } %>
+    
     <main class="container d-flex">
         <%- body %>
     </main>

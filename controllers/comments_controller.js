@@ -13,12 +13,12 @@ module.exports.addComment = async (req, res) => {
                         });
             post.comments.push(comment);
             post.save();
-
+            req.flash('success', "Comment added successfully");
             return res.redirect('back');
         }
     }catch(e){
-        console.log("Error ", e);
-        return;
+        req.flash('error', e);
+        return res.redirect('back');
     }    
 };
 
@@ -32,11 +32,12 @@ module.exports.destroy = async (req, res) => {
             comment.remove();
 
             let post = await Post.findByIdAndUpdate(postId, { $pull: { comments: req.params.id } });
+            req.flash('success', "Comment deleted successfully");
         }
         return res.redirect('back');
 
     } catch (e) {
-        console.log("Error ", e);
-        return;
+        req.flash('error', e);
+        return res.redirect('back');
     }
 };
