@@ -13,17 +13,19 @@ module.exports.createPost = (req, res) => {
     });
 };
 
-module.exports.destroy = (req, res) => {
-    Post.findById(req.params.id, (err, post) => {
-        if (err) { console.log("Error in finding post"); return; }
+module.exports.destroy = async (req, res) => {
+    try {
+        let post = await Post.findById(req.params.id);
 
-        // .id means converting the object id to string
-        if( post.user == req.user.id){
+        if (post.user == req.user.id) {
             post.remove();
 
-            Comment.deleteMany({post: req.params.id}, (err) => {
-                return res.redirect('back');
-            });
+            let comments = await Comment.deleteMany({ post: req.params.id });
         }
-    });
+        return res.redirect('back');
+
+    } catch (e) {
+        console.log("Error ", e);
+        return;
+    }
 }
