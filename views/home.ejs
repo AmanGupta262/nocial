@@ -9,7 +9,7 @@
         <% if(locals.user) { %>
             <div class="post-form white-back">
                 <h3>Create Post</h3>
-                <form action="/posts/create" method="POST">
+                <form action="/posts/create" method="POST" id="post-form">
                     <textarea name="content" rows="10" required placeholder="Enter content here..."></textarea>
                     <button class="btn submit-btn" type="submit">Post</button>
                 </form>
@@ -36,3 +36,5 @@
         <% } %>
     </div>
 </section>
+
+<script src="/js/home_posts.js"></script>
