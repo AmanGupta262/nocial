@@ -1,8 +1,8 @@
-<div class="post white-back">
+<div class="post white-back" id="post-<%= post.id %>">
     <div class="post-title">
         Post Title
         <% if(locals.user && (locals.user.id==post.user.id)){ %>
-            <small><a href="/posts/destroy/<%= post.id %>">X</a></small>
+            <small><a class="delete-post-btn" href="/posts/destroy/<%= post.id %>">X</a></small>
             <% } %>
     </div>
     <div class="post-content">

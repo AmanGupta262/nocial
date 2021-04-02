@@ -15,10 +15,11 @@
                 </form>
             </div>
         <% } %>
-
-        <% for(let post of posts){ %>
-            <%- include("_post", {post: post}) %>  
-        <% } %>
+        <div class="post-container" id="post-container">
+            <% for(let post of posts){ %>
+                <%- include("_post", {post: post}) %>  
+            <% } %>
+        </div>
     </div>
 </section>
 
