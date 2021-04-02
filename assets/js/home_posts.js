@@ -48,5 +48,23 @@
         `);
     };
 
+    // method to delete the post
+    let deletPost = (deleteLink) => {
+        $(deleteLink).click(e => {
+            e.preventDefault();
+
+            $.ajax({
+                method: 'get',
+                url: $(deleteLink).prop('href'),
+                success: (data) => {
+
+                },
+                error: error => {
+                    console.log(error.responseText);
+                }
+            });
+        });
+    };
+
     createPost();
 }
