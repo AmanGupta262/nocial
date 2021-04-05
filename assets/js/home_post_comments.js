@@ -8,9 +8,9 @@ class PostComments{
 
         let self = this;
 
-        // $(' .delete-comment-btn', this.postContainer).each(function(){
-        //     self.deleteComment($(this));
-        // });
+        $(' .delete-comment-btn', this.postContainer).each(function(){
+            self.deleteComment($(this));
+        });
     }
 
     createComment(postId){
@@ -26,7 +26,7 @@ class PostComments{
                 success: function(data){
                     let newComment = postSelf.newCommentDom(data.data.comment);
                     $(`#post-${postId}-comments`).prepend(newComment);
-                    // postSelf.deleteComment($(' .delete-comment-btn', newComment));
+                    postSelf.deleteComment($(' .delete-comment-btn', newComment));
 
                     new Noty({
                         theme: 'relax',
@@ -50,12 +50,40 @@ class PostComments{
                 ${ comment.content }
             </p>
             <small>
-                <a class="delete-comment-btn" href="/comments/destroy/${ comment.id }">X</a>
+                <a class="delete-comment-btn" href="/comments/destroy/${ comment._id }">X</a>
             </small>
             <p class="user"><i class="fas fa-user"></i>
                 ${ comment.user.name }
             </p>
         </div>
         `);
+    }
+
+    deleteComment(deleteLink){
+        $(deleteLink).click(function(e){
+            e.preventDefault();
+
+            $.ajax(
+                {
+                    type: 'get',
+                    url: deleteLink.prop('href'),
+                    success: function(data){
+                        $(`#comment-${data.data.comment_id}`).remove();
+
+                        new Noty({
+                            theme: 'relax',
+                            text: "Comment Deleted",
+                            type: 'success',
+                            layout: 'topRight',
+                            timeout: 1500
+
+                        }).show();
+                    },
+                    error: function (error) {
+                        console.log(error.responseText);
+                    }
+                }
+            );
+        });
     }
 }

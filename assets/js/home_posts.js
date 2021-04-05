@@ -57,8 +57,17 @@
                         ${new Date(post.createdAt).toDateString()}
                     </div>
                 </div>
-                <div class="comments-container">
-                </div>
+                <div class="comments-container" >
+                    <div class="comment-form">
+                        <h4>Add Comment</h4>
+                        <form action="/comments/create" method="post" id="post-${post._id}-comment-form">
+                            <input type="text"  name="content" placeholder="Add comment" required>
+                            <input type="hidden" name="post" value="${post._id}">
+                            <button class="btn submit-btn" type="submit">Add</button>
+                        </form>
+                    </div>
+                    <div class="comments" id="post-${post._id}-comments">
+                    </div> 
             </div>
         `);
     };
@@ -97,7 +106,7 @@
             console.log(deleteBtn);
 
             deletePost(deleteBtn);
-            
+
             // get the post's id by splitting the id attribute
             let postId = self.prop('id').split("-")[1]
             new PostComments(postId);
