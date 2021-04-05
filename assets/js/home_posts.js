@@ -15,6 +15,9 @@
                     $('#post-container').prepend(newPost);
                     deletePost($(' .delete-post-btn', newPost));
 
+                    // call the create comment class
+                    new PostComments(data.data.post._id);
+
                     new Noty({
                         theme: 'relax',
                         text: "Post published!",
@@ -94,6 +97,10 @@
             console.log(deleteBtn);
 
             deletePost(deleteBtn);
+            
+            // get the post's id by splitting the id attribute
+            let postId = self.prop('id').split("-")[1]
+            new PostComments(postId);
         });
     };
 

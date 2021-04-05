@@ -18,8 +18,22 @@
             <%= timeago.format(post.createdAt) %>
         </div>
     </div>
-    <div class="comments-container">
-        <%- include ("_comment") %>
+    <div class="comments-container" >
+        <% if(locals.user) { %>
+            <div class="comment-form">
+                <h4>Add Comment</h4>
+                <form action="/comments/create" method="post" id="post-<%= post._id %>-comment-form">
+                    <input type="text" name="content" placeholder="Add comment" required>
+                    <input type="hidden" name="post" value="<%= post._id %>">
+                    <button class="btn submit-btn" type="submit">Add</button>
+                </form>
+            </div>
+        <% } %>
+            <div class="comments" id="post-<%= post._id %>-comments">
+                <% for(let comment of post.comments){ %>
+                    <%- include ("_comment", {comment: comment}) %>
+                <% } %>
+            </div>
     </div>
 
 </div>

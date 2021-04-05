@@ -1,27 +1,11 @@
-<% if(locals.user) { %>
-    <div class="comment-form">
-        <h4>Add Comment</h4>
-        <form action="/comments/create" method="post">
-            <input type="text" name="content" placeholder="Add comment" required>
-            <input type="hidden" name="post" value="<%= post._id %>">
-            <button class="btn submit-btn" type="submit">Add</button>
-        </form>
-    </div>
-<% } %>
-<% if(post.comments.length ){ %>
-    <div class="comments">
-        <% for(let comment of post.comments){ %>
-            <div class="comment">
-                <p>
-                    <%= comment.content %>
-                </p>
-                <% if(locals.user && (locals.user.id==comment.user.id)){ %>
-                    <small><a href="/comments/destroy/<%= comment.id %>">X</a></small>
-                <% } %>
-                <p class="user"><i class="fas fa-user"></i>
-                    <%= comment.user.name %>
-                </p>
-            </div>
-        <% } %>
-    </div>
-<% } %>
+<div class="comment" id="comment-<%= comment._id %>">
+    <p>
+        <%= comment.content %>
+    </p>
+    <% if(locals.user && (locals.user.id==comment.user.id)){ %>
+        <small><a class="delete-comment-btn" href="/comments/destroy/<%= comment.id %>">X</a></small>
+    <% } %>
+    <p class="user"><i class="fas fa-user"></i>
+        <%= comment.user.name %>
+    </p>
+</div>
