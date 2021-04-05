@@ -11,12 +11,24 @@
                 data: postForm.serialize(),
                 success: (data) => {
                     let newPost = newPostDom(data.data.post);
+                    console.log(data);
                     $('#post-container').prepend(newPost);
+                    deletePost($(' .delete-post-btn', newPost));
+
+                    new Noty({
+                        theme: 'relax',
+                        text: "Post published!",
+                        type: 'success',
+                        layout: 'topRight',
+                        timeout: 1500
+                    }).show();
                 },
                 error: (error) => {
                     console.log(error.responseText);
                 }
-            })
+            });
+            $('#post-content').val("");
+
         });
     };
 
@@ -24,22 +36,22 @@
 
     let newPostDom = (post) => {
         return $(`
-            <div class="post white-back" id="post-${ post._id }">
+            <div class="post white-back" id="post-${post._id}">
                 <div class="post-title">
                     Post Title                    
-                        <small><a class="delete-post-btn" href="/posts/destroy/${ post._id }">X</a></small>
+                        <small><a class="delete-post-btn" href="/posts/destroy/${post._id}">X</a></small>
                 </div>
                 <div class="post-content">
-                    ${ post.content }
+                    ${post.content}
                 </div>
                 <div class="post-detail d-flex">
                     <div class="post-author">
                         <i class="fas fa-user"></i>
-                        ${ post.user.name }
+                        ${post.user.name}
                     </div>
                     <div class="post-date">
                         <i class="fas fa-calendar"></i>
-                        ${ new Date(post.createdAt).toDateString() }
+                        ${new Date(post.createdAt).toDateString()}
                     </div>
                 </div>
                 <div class="comments-container">
@@ -49,7 +61,7 @@
     };
 
     // method to delete the post
-    let deletPost = (deleteLink) => {
+    let deletePost = (deleteLink) => {
         $(deleteLink).click(e => {
             e.preventDefault();
 
@@ -57,7 +69,15 @@
                 method: 'get',
                 url: $(deleteLink).prop('href'),
                 success: (data) => {
+                    $(`#post-${data.data.post_id}`).remove();
 
+                    new Noty({
+                        theme: 'relax',
+                        text: "Post Deleted",
+                        type: 'success',
+                        layout: 'topRight',
+                        timeout: 1500
+                    }).show();
                 },
                 error: error => {
                     console.log(error.responseText);
@@ -66,5 +86,17 @@
         });
     };
 
+    let convertPostsToAjax = () => {
+        $('#post-container .post').each(function () {
+            let self = $(this);
+
+            let deleteBtn = $(' .delete-post-btn', self);
+            console.log(deleteBtn);
+
+            deletePost(deleteBtn);
+        });
+    };
+
     createPost();
+    convertPostsToAjax();
 }

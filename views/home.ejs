@@ -10,7 +10,7 @@
             <div class="post-form white-back">
                 <h3>Create Post</h3>
                 <form action="/posts/create" method="POST" id="post-form">
-                    <textarea name="content" rows="10" required placeholder="Enter content here..."></textarea>
+                    <textarea id="post-content" name="content" rows="10" required placeholder="Enter content here..."></textarea>
                     <button class="btn submit-btn" type="submit">Post</button>
                 </form>
             </div>
@@ -38,4 +38,5 @@
     </div>
 </section>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/timeago.js/2.0.2/timeago.min.js"></script>
 <script src="/js/home_posts.js"></script>
