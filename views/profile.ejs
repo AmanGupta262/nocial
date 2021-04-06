@@ -2,7 +2,12 @@
 
 <% if(user.id == profile_user.id) { %>
         <div class="sign-in-form form white-back">
-                <form action="/users/update/<%= profile_user.id %>" method="post">
+                <form action="/users/update/<%= profile_user.id %>" method="post" enctype="multipart/form-data">
+                        <div class="form-field">
+                                <label for="profile-pic"></label>
+                                <input type="file" name="profile-pic" id="profile-pic" placeholder="Profile Picture">
+                                <small></small>
+                        </div>
                         <div class="form-field">
                                 <label for="email">Email:</label>
                                 <input type="email" name="email" id="email" value="<%= profile_user.email %>" autocomplete="off" placeholder="Enter email" required>
