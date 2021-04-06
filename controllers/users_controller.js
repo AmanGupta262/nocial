@@ -63,16 +63,33 @@ module.exports.destroySession = (req, res) => {
     return res.redirect('/');
 };
 
-module.exports.update = (req, res) => {
-    if(req.user.id == req.params.id){
-        User.findByIdAndUpdate(req.params.id, req.body, (err, user) => {
-            if (err) { console.log("Error in finding user"); return; }
-            
-            req.flash('success', "Your profile updated successfully");
+module.exports.update = async (req, res) => {
+    if (req.user.id == req.params.id) {
+        try {
+            let user = await User.findById(req.params.id);
+            User.uploadedAvatar(req, res, function(err){
+                if(err){ console.log("Multer Error: ", err); return; }
+
+                user.name = req.body;
+                user.email = req.body.email;
+                
+                if(req.file){
+                    // Saving file path in user avatar
+                    user.avatar = User.avatarPath + '/' + req.file.filename;
+                }
+
+                user.save();
+                return res.redirect('back');
+
+            });
+
+        } catch (err) {
+            req.flash('error', err);
             return res.redirect('back');
-        });
+        }
     }
     else{
+        req.flash('error', "Unauthorized Access");
         return res.status('401').send('Unauthorized');
     }
 };
