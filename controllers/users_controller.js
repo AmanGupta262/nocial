@@ -70,7 +70,7 @@ module.exports.update = async (req, res) => {
             User.uploadedAvatar(req, res, function(err){
                 if(err){ console.log("Multer Error: ", err); return; }
 
-                user.name = req.body;
+                user.name = req.body.name;
                 user.email = req.body.email;
                 
                 if(req.file){
