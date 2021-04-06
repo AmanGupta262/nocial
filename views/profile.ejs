@@ -1,7 +1,7 @@
 <link rel="stylesheet" href="/css/form.css">
+        <img src="<%= profile_user.avatar %>" alt="<%= profile_user.name %>" width="100">
 
 <% if(user.id == profile_user.id) { %>
-        <img src="<%= user.avatar %>" alt="<%= user.name %>" width="100">
         <div class="sign-in-form form white-back">
                 <form action="/users/update/<%= profile_user.id %>" method="post" enctype="multipart/form-data">
                         <div class="form-field">

@@ -1,4 +1,6 @@
 const User = require('../models/user');
+const fs = require('fs');
+const path = require('path');
 
 module.exports.profile = (req, res) => {
     User.findById(req.params.id, (err, user) => {
@@ -74,6 +76,9 @@ module.exports.update = async (req, res) => {
                 user.email = req.body.email;
                 
                 if(req.file){
+                    if (user.avatar && fs.existsSync(path.join(__dirname, '..', user.avatar)))
+                        fs.unlinkSync(path.join(__dirname, '..', user.avatar));
+
                     // Saving file path in user avatar
                     user.avatar = User.avatarPath + '/' + req.file.filename;
                 }

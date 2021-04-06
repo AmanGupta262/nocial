@@ -21,7 +21,8 @@ const userSchema = new mongoose.Schema({
         required: true
     },
     avatar: {
-        type: String
+        type: String,
+        default: "/uploads/users/avatars/default"
     }
 }, {
     timestamps: true
@@ -29,7 +30,7 @@ const userSchema = new mongoose.Schema({
 
 let storage = multer.diskStorage({
     destination: function (req, file, cb) {
-        cb(null, path.join(__dirname + '/..' + AVATAR_PATH));
+        cb(null, path.join(__dirname, '..', AVATAR_PATH));
     },
     filename: function (req, file, cb) {
         cb(null, file.fieldname + '-' + Date.now());
