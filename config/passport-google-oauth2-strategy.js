@@ -14,6 +14,8 @@ passport.use(new googleStrategy({
                 console.log("Error in google oauth2 passport: ", err);
                 return;
             }
+            console.log(profile);
+
             if(user){
                 return done(null, user);
             }
