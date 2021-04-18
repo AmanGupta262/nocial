@@ -1,6 +1,7 @@
 const User = require('../models/user');
 const fs = require('fs');
 const path = require('path');
+const bcrypt = require('bcrypt');
 
 module.exports.profile = (req, res) => {
     User.findById(req.params.id, (err, user) => {
@@ -30,8 +31,13 @@ module.exports.create = (req, res) => {
         if(err){ console.log("Error in finding user in signing up"); return;}
 
         if(!user){
-            User.create(req.body, (err, user) => {
+            User.create(req.body, async (err, user) => {
                 if(err){ console.log("Error in creating user in signing up"); return; }
+
+                const salt = await bcrypt.genSalt(10);
+
+                user.password = await bcrypt.hash(user.password, salt);
+                user.save();
 
                 req.flash('success', 'Successfully registered');
                 return res.redirect('/users/sign-in');
