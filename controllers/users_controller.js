@@ -116,7 +116,7 @@ module.exports.resetPassword = async (req, res) => {
     try {
         const resetToken = req.params.token;
         if(resetToken){
-            return res.render('user_new_password', { title: 'nocial | Change Password' });
+            return res.render('user_new_password', { title: 'nocial | Change Password', token: resetToken });
         }
         const token = crypto.randomBytes(32).toString('hex');
         const user = await User.findOne({email: req.body.email});
@@ -144,3 +144,30 @@ module.exports.resetPassword = async (req, res) => {
         return res.redirect('back');
     }
 }
+
+module.exports.newPassword = async (req, res) => {
+    try {
+        const token = req.body.token;
+        const password = req.body.password;
+        const confirmPassword = req.body.confirm_password;
+
+        if (password != confirmPassword) {
+            req.flash('error', "Enter same password");
+            return res.redirect('back');
+        }
+
+        const user = await User.findOne({ resetToken: token });
+        const salt = await bcrypt.genSalt(10);
+
+        user.password = await bcrypt.hash(password, salt);
+        user.save();
+
+        req.flash('success', "Password Updated");
+        return res.redirect('/users/sign-in');
+
+    } catch (e) {
+        console.log(e);
+        req.flash('error', e);
+        return res.redirect('back');
+    }
+};
