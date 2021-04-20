@@ -109,11 +109,19 @@ module.exports.update = async (req, res) => {
 };
 
 module.exports.forgotPassword = (req, res) => {
+    if (req.isAuthenticated()) {
+        req.flash('error', "You are already Signed in!");
+        return res.redirect('back');
+    }
     return res.render('user_reset_password', { title: 'nocial | Forgot Password' });
 }
 
 module.exports.resetPassword = async (req, res) => {
     try {
+        if (req.isAuthenticated()) {
+            req.flash('error', "You are already Signed in!");
+            return res.redirect('back');
+        }
         const resetToken = req.params.token;
         if(resetToken){
             return res.render('user_new_password', { title: 'nocial | Change Password', token: resetToken });
@@ -147,6 +155,10 @@ module.exports.resetPassword = async (req, res) => {
 
 module.exports.newPassword = async (req, res) => {
     try {
+        if (req.isAuthenticated()) {
+            req.flash('error', "You are already Signed in!");
+            return res.redirect('back');
+        }
         const token = req.body.token;
         const password = req.body.password;
         const confirmPassword = req.body.confirm_password;
@@ -157,13 +169,19 @@ module.exports.newPassword = async (req, res) => {
         }
 
         const user = await User.findOne({ resetToken: token });
-        const salt = await bcrypt.genSalt(10);
+        if(user.expireToken > Date.now()){
+            const salt = await bcrypt.genSalt(10);
 
-        user.password = await bcrypt.hash(password, salt);
-        user.save();
+            user.password = await bcrypt.hash(password, salt);
+            user.save();
 
-        req.flash('success', "Password Updated");
-        return res.redirect('/users/sign-in');
+            user.resetToken = '';
+            user.expireToken = Date.now();
+            req.flash('success', "Password Updated");
+            return res.redirect('/users/sign-in');
+        }
+        req.flash('error', "Session Expired");
+        return res.redirect('/users/forgot-password');
 
     } catch (e) {
         console.log(e);
