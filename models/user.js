@@ -23,6 +23,12 @@ const userSchema = new mongoose.Schema({
     avatar: {
         type: String,
         default: "/uploads/users/avatars/default"
+    },
+    resetToken: {
+        type: String
+    },
+    expireToken: {
+        type: Date
     }
 }, {
     timestamps: true

@@ -2,6 +2,9 @@ const User = require('../models/user');
 const fs = require('fs');
 const path = require('path');
 const bcrypt = require('bcrypt');
+const crypto = require('crypto');
+const nodemailer = require('../config/nodemailer');
+const { unuse } = require('passport');
 
 module.exports.profile = (req, res) => {
     User.findById(req.params.id, (err, user) => {
@@ -104,3 +107,36 @@ module.exports.update = async (req, res) => {
         return res.status('401').send('Unauthorized');
     }
 };
+
+module.exports.forgotPassword = (req, res) => {
+    return res.render('user_reset_password', { title: 'nocial | Forgot Password' });
+}
+
+module.exports.resetPassword = async (req, res) => {
+    try {
+        const token = crypto.randomBytes(32).toString('hex');
+        const user = await User.findOne({email: req.body.email});
+        user.resetToken = token;
+        user.expireToken = Date.now() + 600000;
+        await user.save();
+
+        nodemailer.transporter.sendMail({
+            to: req.body.email,
+            from: "no-reply@nocial.com",
+            subject: "Reset Password",
+            html: `<h5>Click <a href="http://localhost:8000/users/create-token/${token}">here</a> to create new password</h5>`
+        },(err, info) => {
+            if(err) { console.log('Error in sending mail: ', err); return; }
+
+        console.log("Message Sent");
+            return;
+        });
+        req.flash('success', "Link sent");
+        return res.redirect('back');
+
+    } catch (e) {
+        console.log(e);
+        req.flash('error', e);
+        return res.redirect('back');
+    }
+}
