@@ -114,6 +114,10 @@ module.exports.forgotPassword = (req, res) => {
 
 module.exports.resetPassword = async (req, res) => {
     try {
+        const resetToken = req.params.token;
+        if(resetToken){
+            return res.render('user_new_password', { title: 'nocial | Change Password' });
+        }
         const token = crypto.randomBytes(32).toString('hex');
         const user = await User.findOne({email: req.body.email});
         user.resetToken = token;
@@ -124,7 +128,7 @@ module.exports.resetPassword = async (req, res) => {
             to: req.body.email,
             from: "no-reply@nocial.com",
             subject: "Reset Password",
-            html: `<h5>Click <a href="http://localhost:8000/users/create-token/${token}">here</a> to create new password</h5>`
+            html: `<h5>Click <a href="http://localhost:8000/users/reset-password/${token}">here</a> to create new password</h5>`
         },(err, info) => {
             if(err) { console.log('Error in sending mail: ', err); return; }
 
