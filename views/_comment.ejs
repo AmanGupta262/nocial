@@ -8,4 +8,11 @@
     <p class="user"><i class="fas fa-user"></i>
         <%= comment.user.name %>
     </p>
+    <p class="likes">
+        <% if(locals.user){ %>
+            <a href="/likes/toggle/?id=<%= comment.id %>&type=Comment"><%= comment.likes.length %> likes</a>
+        <% }else{ %>
+            <%= comment.likes.length %> likes
+        <% } %>
+    </p>
 </div>

@@ -8,6 +8,13 @@
     <div class="post-content">
         <%= post.content %>
     </div>
+    <div class="likes">
+        <% if(locals.user){ %>
+            <a href="/likes/toggle/?id=<%= post.id %>&type=Post"><%= post.likes.length %> likes</a>
+        <% }else{ %>
+            <%= post.likes.length %> likes
+        <% } %>
+    </div>
     <div class="post-detail d-flex">
         <div class="post-author">
             <i class="fas fa-user"></i>
