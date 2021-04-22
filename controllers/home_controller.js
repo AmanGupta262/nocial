@@ -1,16 +1,31 @@
-const Post = require('../models/post')
-const User = require('../models/user')
+const Post = require('../models/post');
+const User = require('../models/user');
+const Like = require('../models/like');
+const Comment = require('../models/comment');
 const timeago = require('timeago.js');
 
 module.exports.home = async function (req, res) {
     try {
-        let posts = await Post.find({}).populate('user').sort('-createdAt')
+        let posts = await Post.find({})
+            .populate('user')
             .populate({
                 path: 'comments',
-                populate: {
-                    path: 'user'
-                },
-            });
+                model: Comment,
+                populate: [
+                    {
+                        path: 'user',
+                        select: 'name',
+                        model: User
+                    },
+                    {
+                        path: 'likes',
+                        model: Like
+                    }
+                ]
+            })
+            .populate('likes')
+            .sort('-createdAt');
+            
         let users = await User.find({});
 
         return res.render('home', {

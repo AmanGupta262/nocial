@@ -39,5 +39,13 @@
 </section>
 
 <!-- importing this script for creating the comments -->
+<script src="/js/toggle_likes.js"></script>
 <script src="/js/home_post_comments.js"></script>
 <script src="/js/home_posts.js"></script>
+
+<script>
+    $('a.toggle-like-btn').each(function () {
+        let self = this;
+        let toggleLike = new ToggleLike(self);
+    });
+</script>

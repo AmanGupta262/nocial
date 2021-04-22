@@ -10,7 +10,7 @@
     </p>
     <p class="likes">
         <% if(locals.user){ %>
-            <a href="/likes/toggle/?id=<%= comment.id %>&type=Comment"><%= comment.likes.length %> likes</a>
+            <a href="/likes/toggle/?id=<%= comment.id %>&type=Comment" data-likes="<%= comment.likes.length %>" class="toggle-like-btn"><%= comment.likes.length %> likes</a>
         <% }else{ %>
             <%= comment.likes.length %> likes
         <% } %>
