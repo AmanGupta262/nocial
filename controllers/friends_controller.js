@@ -5,29 +5,34 @@ module.exports.addFriend = async (req, res) => {
     try {
         let isFriend = false;
 
-        let userExists = await User.findOne({ _id: req.params.id });
+        let existingFriend = await Friendship.findOne({
+            from_user: req.user._id,
+            to_user: req.params.id
+        });
 
-        if (userExists) {
-            let existingFriend = await Friendship.findOne({
-                from_user: req.params.id,
-                to_user: req.user._id
+        let toUser = await Users.findById(req.params.id);
+        let fromUser = await Users.findById(req.user._id);
+
+        if (existingFriend) {
+            fromUser.friends.pull(existingFriend._id);
+            toUser.friends.pull(existingFriend._id);
+
+            fromUser.save();
+            toUser.save();
+
+            existingFriend.remove();
+        } else {
+            const newFriend = await Friendship.create({
+                from_user: req.user._id,
+                to_user: req.params.id
             });
-            if(existingFriend){
-                req.user.friends.pull(existingfriend._id);
-                req.user.save();
+            fromUser.friends.push(newFriend._id);
+            toUser.friends.push(newFriend._id);
 
-                existingFriend.remove();
-            }else{
-                const newFriend = await Friendship.create({
-                    from_user: req.user._id,
-                    to_user: req.params.id
-                });
-
-                req.user.friends.push(newFriend._id);
-                req.user.save();
-                isFriend = true;
-
-            }
+            fromUser.save();
+            toUser.save();
+            
+            isFriend = true;
         }
 
         return res.status(200).json({
@@ -42,6 +47,6 @@ module.exports.addFriend = async (req, res) => {
             message: 'Internal Server Error'
         });
     }
-   
+
 
 };

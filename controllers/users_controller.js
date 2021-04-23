@@ -6,16 +6,26 @@ const crypto = require('crypto');
 const nodemailer = require('../config/nodemailer');
 const { unuse } = require('passport');
 
-module.exports.profile = (req, res) => {
-    User.findById(req.params.id, (err, user) => {
-        if (err) { console.log("Error in finding user"); return; }
+const Friendship = require('../models/friendship');
 
-        return res.render('profile', {
-             title: 'Profile',
-             profile_user: user 
+module.exports.profile = async (req, res) => {
+    try {
+        const user = await User.findById(req.params.id);
+
+        await user.populate('friends');
+        
+        console.log(user);
+
+        return res.render('user_profile', {
+            title: 'Profile',
+            profile_user: user
         });
-    });
-    
+        
+    } catch (e) {
+        console.log(e);
+        req.flash('error', e);
+        return res.redirect('back');
+    }    
 };
 
 module.exports.signUp = (req, res) => {

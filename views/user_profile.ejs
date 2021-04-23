@@ -31,4 +31,20 @@
         <p>
                 <%= profile_user.email %>
         </p>
+        <p>
+                <% let isFriend = false; %>
+                <% for( let friend of profile_user.friends){ %>
+                        <% if(friend.to_user == locals.user.id || friend.from_user == locals.user.id ){ %>
+                                <% isFriend = true; break; %>
+                        <% } %>
+                <% } %>
+
+                <% if(isFriend){ %>
+                        <a class="toggle-friend-btn" href="/friends/add-friend/<%= profile_user.id %>">Remove Friend</a>
+                <% }else{ %>
+                        <a class="toggle-friend-btn" href="/friends/add-friend/<%= profile_user.id %>">Add Friend</a>
+                <% } %>
+        </p>
 <% } %>
+
+<script src="/js/toggle-friend.js"></script>
