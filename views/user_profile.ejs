@@ -34,8 +34,9 @@
         <p>
                 <% let isFriend = false; %>
                 <% for( let friend of profile_user.friends){ %>
+                        <% console.log(friend.from_user); %>
                         <% if(friend.to_user == locals.user.id || friend.from_user == locals.user.id ){ %>
-                                <% isFriend = true; break; %>
+                                <% isFriend = true;console.log(isFriend); %>
                         <% } %>
                 <% } %>
 

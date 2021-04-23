@@ -31,8 +31,8 @@
     <div class="friends-container white-back">
         <% for(let f of friends){ %>
             <div class="user">
-                <a href="/users/profile/<%= f.id %>"><i class="fas fa-user-circle"></i>
-                    <%= f.name %>
+                <a href="/users/profile/<%= f.to_user.id %>"><i class="fas fa-user-circle"></i>
+                    <%= f.to_user.name %>
                 </a>
             </div>
         <% } %>

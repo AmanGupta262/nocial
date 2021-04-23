@@ -10,8 +10,8 @@ module.exports.addFriend = async (req, res) => {
             to_user: req.params.id
         });
 
-        let toUser = await Users.findById(req.params.id);
-        let fromUser = await Users.findById(req.user._id);
+        let toUser = await User.findById(req.params.id);
+        let fromUser = await User.findById(req.user._id);
 
         if (existingFriend) {
             fromUser.friends.pull(existingFriend._id);

@@ -10,7 +10,7 @@ const friendshipSchema = new mongoose.Schema({
         ref: 'User'
     }
 },{
-    timestamp: true
+    timestamps: true
 });
 
 const Friendship = mongoose.model('Friendship', friendshipSchema);

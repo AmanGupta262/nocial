@@ -6,14 +6,13 @@ const crypto = require('crypto');
 const nodemailer = require('../config/nodemailer');
 const { unuse } = require('passport');
 
-const Friendship = require('../models/friendship');
+// const Friendship = require('../models/friendship');
 
 module.exports.profile = async (req, res) => {
     try {
-        const user = await User.findById(req.params.id);
+        const user = await User.findById(req.params.id)
+        .populate("friends");
 
-        await user.populate('friends');
-        
         console.log(user);
 
         return res.render('user_profile', {

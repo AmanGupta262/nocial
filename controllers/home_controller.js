@@ -30,23 +30,22 @@ module.exports.home = async function (req, res) {
         let users = await User.find({});
         let friends = [];
         if(req.user){
-            friends = await req.user.populate({
-                path: 'friends',
-                model: Friendship,
-                populate:{
-                    path: 'to_user',
-                    select: 'name',
-                    model: User
+            friends = await User.findById(req.user.id)
+            .populate({
+                path: "friends",
+                populate: {
+                    path: 'to_user from_user',
+                    select: 'name'
                 }
             });
-            console.log(req.user.friends);
         }
+        console.log(friends);
 
         return res.render('home', {
             title: "nocial | Home",
             posts: posts,
             all_users: users,
-            friends: [],
+            friends: friends.friends,
             timeago: timeago
         });
     } catch (e) {

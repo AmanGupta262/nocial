@@ -28,7 +28,7 @@ class ToggleLike{
 
             })
             .fail(function (errData) {
-                console.log('error in completing the request: ', errdata);
+                console.log('error in completing the request: ', errData);
             });
         });    
     }
