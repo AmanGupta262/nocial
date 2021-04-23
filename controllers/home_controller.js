@@ -2,6 +2,7 @@ const Post = require('../models/post');
 const User = require('../models/user');
 const Like = require('../models/like');
 const Comment = require('../models/comment');
+const Friendship = require('../models/friendship');
 const timeago = require('timeago.js');
 
 module.exports.home = async function (req, res) {
@@ -27,11 +28,25 @@ module.exports.home = async function (req, res) {
             .sort('-createdAt');
             
         let users = await User.find({});
+        let friends = [];
+        if(req.user){
+            friends = await req.user.populate({
+                path: 'friends',
+                model: Friendship,
+                populate:{
+                    path: 'to_user',
+                    select: 'name',
+                    model: User
+                }
+            });
+            console.log(req.user.friends);
+        }
 
         return res.render('home', {
             title: "nocial | Home",
             posts: posts,
             all_users: users,
+            friends: [],
             timeago: timeago
         });
     } catch (e) {

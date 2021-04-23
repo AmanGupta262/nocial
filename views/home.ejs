@@ -24,8 +24,23 @@
 </section>
 
 <section class="aside">
+    <!-- Friends -->
     <header>
         <h3 class="white-back">Friends</h3>
+    </header>
+    <div class="friends-container white-back">
+        <% for(let f of friends){ %>
+            <div class="user">
+                <a href="/users/profile/<%= f.id %>"><i class="fas fa-user-circle"></i>
+                    <%= f.name %>
+                </a>
+            </div>
+        <% } %>
+    </div>
+
+    <!-- All Users -->
+    <header>
+        <h3 class="white-back">Users</h3>
     </header>
     <div class="friends-container white-back">
         <% for(let u of all_users){ %>

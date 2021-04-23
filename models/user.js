@@ -24,6 +24,12 @@ const userSchema = new mongoose.Schema({
         type: String,
         default: "/uploads/users/avatars/default"
     },
+    friends: [
+        {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'Friendship'
+        }
+    ],
     resetToken: {
         type: String
     },
