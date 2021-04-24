@@ -28,6 +28,7 @@
     <header>
         <h3 class="white-back">Friends</h3>
     </header>
+    <% if(locals.user){ %>
     <div class="friends-container white-back">
         <% for(let f of friends){ %>
             <div class="user">
@@ -37,7 +38,7 @@
             </div>
         <% } %>
     </div>
-
+    <% } %>
     <!-- All Users -->
     <header>
         <h3 class="white-back">Users</h3>
@@ -53,6 +54,8 @@
     </div>
 </section>
 
+<%- include("_chatbox") %>
+
 <!-- importing this script for creating the comments -->
 <script src="/js/toggle_likes.js"></script>
 <script src="/js/home_post_comments.js"></script>
@@ -62,5 +65,8 @@
     $('a.toggle-like-btn').each(function () {
         let self = this;
         let toggleLike = new ToggleLike(self);
+    });
+    $('.close-btn').click(function(){
+        $('.chatbox-container').css({'display': 'none'});
     });
 </script>

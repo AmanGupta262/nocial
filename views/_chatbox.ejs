@@ -1,0 +1,20 @@
+<% if(locals.user){ %>
+    <link rel="stylesheet" href="/css/chatbox.css">
+    
+    <div class="chatbox-container white-back d-flex">
+        <button class="btn close-btn">X</button>
+        <div class="message-container">
+            <div class="left message">
+                Hii! Lorem, ipsum dolor sit amet consectetur adipisicing elit. Commodi, fugiat?
+            </div>
+            <div class="right message">
+                Hey Lorem ipsum, dolor sit amet consectetur adipisicing elit. Harum, qui.
+            </div>
+        </div>
+        <div class="chat-form">
+            <input type="text" name="message" id="message">
+            <button class="btn btn-submit">Send</button>
+        </div>
+    </div>
+
+<% } %>
