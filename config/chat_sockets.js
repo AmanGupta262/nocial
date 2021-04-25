@@ -15,9 +15,14 @@ module.exports.chatSockets = function(socketServer){
         socket.on('join_room', function(data){
             console.log('Joining request received: ', data);
 
-            socket.join(data.chatroom);
+            socket.join(data.chat_room);
 
-            io.in(data.chatrom).emit('user_joined', data);
+            io.in(data.chat_room).emit('user_joined', data);
+        });
+
+        socket.on('send_message', function(data){
+            io.in(data.chat_room).emit('receive_message', data);
         });
     });
+
 };
