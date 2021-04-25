@@ -39,8 +39,6 @@ module.exports.home = async function (req, res) {
                 }
             });
         }
-        console.log(friends);
-
         return res.render('home', {
             title: "nocial | Home",
             posts: posts,

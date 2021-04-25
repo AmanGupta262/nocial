@@ -70,3 +70,11 @@
         $('.chatbox-container').css({'display': 'none'});
     });
 </script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/4.0.1/socket.io.js"></script>
+<script src="/js/chat_engine.js"></script>
+    <% if(locals.user){ %>
+    <script>
+        new ChatEngine('user-chatbox', '<%= locals.user.email %>');
+    </script>
+    <% } %>

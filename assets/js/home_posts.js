@@ -11,7 +11,6 @@
                 data: postForm.serialize(),
                 success: (data) => {
                     let newPost = newPostDom(data.data.post);
-                    console.log(data);
                     $('#post-container').prepend(newPost);
                     deletePost($(' .delete-post-btn', newPost));
 
@@ -108,7 +107,6 @@
             let self = $(this);
 
             let deleteBtn = $(' .delete-post-btn', self);
-            console.log(deleteBtn);
 
             deletePost(deleteBtn);
 
