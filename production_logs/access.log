@@ -1,0 +1,5 @@
+::1 - - [28/Apr/2021:06:30:06 +0000] "GET / HTTP/1.1" 200 4184 "-" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36"
+::1 - - [28/Apr/2021:06:30:07 +0000] "GET /favicon.ico HTTP/1.1" 404 150 "http://localhost:8000/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36"
+::1 - - [28/Apr/2021:06:30:44 +0000] "GET /users/profile/6088fb421036921fd371379a HTTP/1.1" 302 72 "http://localhost:8000/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36"
+::1 - - [28/Apr/2021:06:30:44 +0000] "GET /users/sign-in HTTP/1.1" 200 2635 "http://localhost:8000/" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36"
+::1 - - [28/Apr/2021:06:31:07 +0000] "GET / HTTP/1.1" 200 4184 "http://localhost:8000/users/sign-in" "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.90 Safari/537.36"

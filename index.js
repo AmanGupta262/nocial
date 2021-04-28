@@ -6,6 +6,7 @@ const expressLayouts = require('express-ejs-layouts');
 const db = require('./config/mongoose');
 const env = require('./config/environment');
 const path = require('path');
+const logger = require('morgan');
 
 // used for authentication cookie
 const session = require('express-session');
@@ -33,13 +34,15 @@ console.log("Chat server is listening on port 5000");
 app.use(expressLayouts);
 
 // Sass
-app.use(sassMiddleware({
-    src: path.join(__dirname, env.asset_path, 'scss'),
-    dest: path.join(__dirname, env.asset_path, 'css'),
-    debug: true,
-    outputStyle: 'extended',
-    prefix: '/css'
-}));
+if(env.name == 'development'){
+    app.use(sassMiddleware({
+        src: path.join(__dirname, env.asset_path, 'scss'),
+        dest: path.join(__dirname, env.asset_path, 'css'),
+        debug: true,
+        outputStyle: 'extended',
+        prefix: '/css'
+    }));
+}
 
 // Html parser
 app.use(express.urlencoded());
@@ -52,6 +55,9 @@ app.use(express.static(path.join(__dirname, env.asset_path)));
 
 // make uploads path available to the browser
 app.use('/uploads', express.static(__dirname + '/uploads'));
+
+// Logging
+app.use(logger(env.morgan.mode, env.morgan.options));
 
 // set styles and scripts for sub pages
 app.set('layout extractStyles', true);
