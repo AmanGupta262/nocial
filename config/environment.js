@@ -13,7 +13,7 @@ const accessLogStream = rfs.createStream('access.log', {
 
 const development = {
     name: 'development',
-    asset_path: 'assets',
+    asset_path: 'public/assets',
     session_cookie_key: 'elBlcAcfTZZkBX197vuc6p4K3HkvAa14',
     db: 'nocial_development',
     smtp: {

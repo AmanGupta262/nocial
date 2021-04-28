@@ -1,0 +1,22 @@
+.navbar {
+  background-color: white;
+  justify-content: space-between;
+  color: dodgerblue;
+  padding: 0.5rem;
+  box-shadow: 0 0 10px 5px #dceaff;
+  position: sticky;
+  top: 0;
+  z-index: 100; }
+  .navbar .logo {
+    font-size: 1.5rem;
+    font-weight: bold;
+    letter-spacing: 3px; }
+  .navbar ul {
+    list-style: none; }
+  .navbar a {
+    color: dodgerblue;
+    text-decoration: none;
+    margin: 0.5rem;
+    outline: none; }
+    .navbar a:hover, .navbar a:focus {
+      color: black; }
