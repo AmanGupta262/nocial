@@ -4,6 +4,7 @@ const cookieParser = require('cookie-parser');
 const port = 8000;
 const expressLayouts = require('express-ejs-layouts');
 const db = require('./config/mongoose');
+const env = require('./config/environment');
 
 // used for authentication cookie
 const session = require('express-session');
@@ -32,8 +33,8 @@ app.use(expressLayouts);
 
 // Sass
 app.use(sassMiddleware({
-    src: './assets/scss',
-    dest: './assets/css',
+    src: path.join(__dirname, env.asset_path, 'scss'),
+    dest: path.join(__dirname, env.asset_path, 'css'),
     debug: true,
     outputStyle: 'extended',
     prefix: '/css'
@@ -46,7 +47,7 @@ app.use(express.urlencoded());
 app.use(cookieParser());
 
 //static files
-app.use(express.static('./assets'));
+app.use(express.static(path.join(__dirname, env.asset_path)));
 
 // make uploads path available to the browser
 app.use('/uploads', express.static(__dirname + '/uploads'));
@@ -62,7 +63,7 @@ app.set('views', './views');
 // use MongoStore to store cookie in mongodb
 app.use(session({
     name : 'nocial',
-    secret : 'fjdsfdjk',
+    secret : env.session_cookie_key,
     saveUninitialized : false,
     resave : false,
     cookie: {
