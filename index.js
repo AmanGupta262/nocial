@@ -1,5 +1,7 @@
 const express = require('express');
 const app = express();
+
+require('./config/view_helpers')(app);
 const cookieParser = require('cookie-parser');
 const port = 8000;
 const expressLayouts = require('express-ejs-layouts');

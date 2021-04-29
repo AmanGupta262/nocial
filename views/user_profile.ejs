@@ -1,4 +1,5 @@
-<link rel="stylesheet" href="/css/form.css">
+<link rel="stylesheet" href="<%= assetPath('css/form.css') %>">
+
         <img src="<%= profile_user.avatar %>" alt="<%= profile_user.name %>" width="100">
 
 <% if(user.id == profile_user.id) { %>
@@ -48,4 +49,4 @@
         </p>
 <% } %>
 
-<script src="/js/toggle-friend.js"></script>
+<script src="<%= assetPath('js/toggle-friend.js') %>"></script>

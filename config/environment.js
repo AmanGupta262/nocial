@@ -26,9 +26,9 @@ const development = {
             pass: process.env.PASSWORD
         }
     },
-    google_oauth_client_id: process.env.GOOGLE_OATH_CLIENT_ID,
-    google_oauth_client_secret: process.env.GOOGLE_OATH_CLIENT_SECRET,
-    google_oauth_callback_url: process.env.GOOGLE_OATH_CALLBACK_URL,
+    google_oauth_client_id: process.env.GOOGLE_OAUTH_CLIENT_ID,
+    google_oauth_client_secret: process.env.GOOGLE_OAUTH_CLIENT_SECRET,
+    google_oauth_callback_url: process.env.GOOGLE_OAUTH_CALLBACK_URL,
     jwt_secret: 'ZWGUEuaN8vl45aN0zloy1wTl1AlkVVME',
     morgan: {
         mode: 'dev',
@@ -51,9 +51,9 @@ const production = {
             pass: process.env.PASSWORD
         }
     },
-    google_oauth_client_id: process.env.GOOGLE_OATH_CLIENT_ID,
-    google_oauth_client_secret: process.env.GOOGLE_OATH_CLIENT_SECRET,
-    google_oauth_callback_url: process.env.GOOGLE_OATH_CALLBACK_URL,
+    google_oauth_client_id: process.env.GOOGLE_OAUTH_CLIENT_ID,
+    google_oauth_client_secret: process.env.GOOGLE_OAUTH_CLIENT_SECRET,
+    google_oauth_callback_url: process.env.GOOGLE_OAUTH_CALLBACK_URL,
     jwt_secret: process.env.JWT_SECRET,
     morgan: {
         mode: 'combined',
